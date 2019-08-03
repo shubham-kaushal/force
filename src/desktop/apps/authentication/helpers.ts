@@ -74,8 +74,18 @@ export const handleSubmit = (
         analytics.track(action, pickBy(properties, identity))
       }
 
-      const defaultRedirect = getRedirect(type)
-      window.location = modalOptions.redirectTo || (defaultRedirect as any)
+      let afterAuthURL: URL
+      if (modalOptions.redirectTo)
+        afterAuthURL = new URL(modalOptions.redirectTo, sd.APP_URL)
+      else afterAuthURL = getRedirect(type)
+
+      const result = apiAuthWithRedirectUrl(res, afterAuthURL)
+
+      console.log("---------")
+      console.log(result)
+      console.log("---------")
+
+      // window.location.href = result.href
     },
     error: (_, res) => {
       const error = res.responseJSON
@@ -112,19 +122,33 @@ export const setCookies = options => {
   }
 }
 
-export const getRedirect = type => {
+// TODO: is there a type for a Express response?
+// TODO: handle forgettting passport
+export function apiAuthWithRedirectUrl(response: any, redirectPath: URL): URL {
+  const redirectUrl = sd.APP_URL + redirectPath.pathname
+  const accessToken = response.user.accessToken
+
+  return new URL(
+    `${
+      sd.API_URL
+    }/users/sign_in?access_token=${accessToken}&redirect_uri=${redirectUrl}`
+  )
+}
+
+export function getRedirect(type): URL {
+  const appBaseURL = new URL(sd.APP_URL)
   const { location } = window
   switch (type) {
     case "login":
     case "forgot":
       if (["/login", "/forgot"].includes(location.pathname)) {
-        return "/"
+        return new URL("/", appBaseURL)
       } else {
-        return location
+        return new URL(location.href, appBaseURL)
       }
     case "signup":
-      return "/personalize"
+      return new URL("/personalize", appBaseURL)
     default:
-      return window.location
+      return new URL(window.location.href, appBaseURL)
   }
 }

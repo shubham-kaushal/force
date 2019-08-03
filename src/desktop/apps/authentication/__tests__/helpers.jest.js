@@ -1,5 +1,10 @@
 import Cookies from "cookies-js"
-import { handleSubmit, setCookies, getRedirect } from "../helpers"
+import {
+  handleSubmit,
+  setCookies,
+  getRedirect,
+  apiAuthWithRedirectUrl,
+} from "../helpers"
 import Backbone from "backbone"
 import $ from "jquery"
 
@@ -7,6 +12,8 @@ jest.mock("cookies-js")
 jest.mock("sharify", () => {
   return {
     data: {
+      API_URL: "https://test-api.artsy.net",
+      APP_URL: "https://test-app.artsy.net",
       AP: {
         loginPagePath: "foo",
       },
@@ -239,7 +246,24 @@ describe("Authentication Helpers", () => {
       })
     })
   })
-  describe("#getRedirect", () => {
+  describe("#apiAuthWithRedirectUrl", () => {
+    it("includes the user's access token from the response", () => {
+      const response = { user: { accessToken: "some-access-token" } }
+      const actual = apiAuthWithRedirectUrl(response)
+
+      expect(actual).toMatch("access_token=some-access-token")
+    })
+
+    it("builds and returns a force link for Gravity to redirect towards", () => {
+      const response = { user: { accessToken: "some-access-token" } }
+      const redirectPath = "/any-path"
+      const actual = apiAuthWithRedirectUrl(response, redirectPath)
+
+      const expectedRedirectUri = "https://test-app.artsy.net/any-path"
+      expect(actual).toMatch(`redirect_uri=${expectedRedirectUri}`)
+    })
+  })
+  describe.only("#getRedirect", () => {
     it("Returns home if type is login and path is login", () => {
       window.history.pushState({}, "", "/login")
       const redirectTo = getRedirect("login")
@@ -260,6 +284,7 @@ describe("Authentication Helpers", () => {
     it("Returns window.location by default", () => {
       window.history.pushState({}, "", "/magazine")
       const redirectTo = getRedirect("login")
+
       expect(redirectTo).toBe(window.location)
     })
   })
