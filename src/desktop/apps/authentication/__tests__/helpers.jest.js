@@ -246,12 +246,22 @@ describe("Authentication Helpers", () => {
       })
     })
   })
+
   describe("#apiAuthWithRedirectUrl", () => {
-    it("includes the user's access token from the response", () => {
+    it("gets a trust token from the api", () => {
       const response = { user: { accessToken: "some-access-token" } }
       const actual = apiAuthWithRedirectUrl(response)
 
-      expect(actual).toMatch("access_token=some-access-token")
+      expect(actual).toMatch("trust_token")
+    })
+
+    it("doesn't redirect to the API if the client can't get a trust token", () => {
+      const response = { user: { accessToken: "some-access-token" } }
+      const redirectPath = "/any-path"
+
+      const actual = apiAuthWithRedirectUrl(response, redirectPath)
+
+      expect(actual).toEqual("https://test-app.artsy.net/any-path")
     })
 
     it("builds and returns a force link for Gravity to redirect towards", () => {
@@ -263,7 +273,8 @@ describe("Authentication Helpers", () => {
       expect(actual).toMatch(`redirect_uri=${expectedRedirectUri}`)
     })
   })
-  describe.only("#getRedirect", () => {
+
+  describe("#getRedirect", () => {
     it("Returns home if type is login and path is login", () => {
       window.history.pushState({}, "", "/login")
       const redirectTo = getRedirect("login")

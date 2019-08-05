@@ -41,7 +41,7 @@ export const handleSubmit = (
   user.set(userAttributes)
 
   const options = {
-    success: (_, res) => {
+    success: async (_, res) => {
       formikBag.setSubmitting(false)
       const analytics = (window as any).analytics
 
@@ -79,13 +79,9 @@ export const handleSubmit = (
         afterAuthURL = new URL(modalOptions.redirectTo, sd.APP_URL)
       else afterAuthURL = getRedirect(type)
 
-      const result = apiAuthWithRedirectUrl(res, afterAuthURL)
+      const result = await apiAuthWithRedirectUrl(res, afterAuthURL)
 
-      console.log("---------")
-      console.log(result)
-      console.log("---------")
-
-      // window.location.href = result.href
+      window.location.href = result.href
     },
     error: (_, res) => {
       const error = res.responseJSON
@@ -123,16 +119,34 @@ export const setCookies = options => {
 }
 
 // TODO: is there a type for a Express response?
-// TODO: handle forgettting passport
-export function apiAuthWithRedirectUrl(response: any, redirectPath: URL): URL {
+export async function apiAuthWithRedirectUrl(
+  response: any,
+  redirectPath: URL
+): Promise<URL> {
   const redirectUrl = sd.APP_URL + redirectPath.pathname
-  const accessToken = response.user.accessToken
+  const accessToken = (response.user || {}).accessToken
 
-  return new URL(
-    `${
-      sd.API_URL
-    }/users/sign_in?access_token=${accessToken}&redirect_uri=${redirectUrl}`
-  )
+  // There isn't an access token when we don't have a valid session, for example,
+  // when the user is resetting their password.
+  if (!accessToken) return new URL(redirectUrl)
+
+  const tokenResponse = await fetch(sd.API_URL + "/api/v1/me/trust_token", {
+    method: "POST",
+    headers: { "X-Access-Token": accessToken },
+  })
+
+  if (tokenResponse.ok) {
+    const responseBody = await tokenResponse.json()
+    const trustToken = responseBody["trust_token"]
+
+    return new URL(
+      `${
+        sd.API_URL
+      }/users/sign_in?trust_token=${trustToken}&redirect_uri=${redirectUrl}`
+    )
+  } else {
+    return new URL(redirectUrl)
+  }
 }
 
 export function getRedirect(type): URL {
