@@ -262,6 +262,7 @@ describe("Authentication Helpers", () => {
         expect(actual.toString()).toMatch("https://app.example.com/any-path")
       })
     })
+
     describe("when there is a current user", () => {
       describe("when we can get a trust token from the api", () => {
         beforeEach(() => {
@@ -307,6 +308,7 @@ describe("Authentication Helpers", () => {
           expect(actual.toString()).toMatch(`trust_token=a-trust-token`)
         })
       })
+
       describe("when we aren't authorized to get a trust token from the api", () => {
         beforeEach(() => {
           fetch.mockResponseOnce(
@@ -317,6 +319,7 @@ describe("Authentication Helpers", () => {
             { status: 401 }
           )
         })
+
         it("returns the app URL, not the api url", async () => {
           const response = { user: { accessToken: "some-access-token" } }
           const redirectPath = new URL("/any-path", "https://app.example.com")
@@ -366,7 +369,7 @@ describe("Authentication Helpers", () => {
       window.history.pushState({}, "", "/magazine")
       const redirectTo = getRedirect("login")
 
-      expect(redirectTo).toBe(window.location)
+      expect(redirectTo.toString()).toBe(window.location.href)
     })
   })
 })
