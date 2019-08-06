@@ -248,8 +248,8 @@ describe("Authentication Helpers", () => {
   })
 
   describe("#apiAuthWithRedirectUrl", () => {
-    beforeEach(() => {
-      fetch.resetMocks()
+    afterEach(() => {
+      jest.clearAllMocks()
     })
 
     describe("when there isn't a current user", () => {
@@ -266,11 +266,16 @@ describe("Authentication Helpers", () => {
     describe("when there is a current user", () => {
       describe("when we can get a trust token from the api", () => {
         beforeEach(() => {
-          fetch.mockResponseOnce(
-            JSON.stringify({
-              trust_token: "a-trust-token",
-              issued_at: "some-datetime",
-              expires_in: "some-datetime",
+          global.fetch = jest.fn(() =>
+            Promise.resolve({
+              status: 200,
+              ok: true,
+              json: () =>
+                Promise.resolve({
+                  trust_token: "a-trust-token",
+                  issued_at: "some-datetime",
+                  expires_in: "some-datetime",
+                }),
             })
           )
         })
@@ -311,12 +316,16 @@ describe("Authentication Helpers", () => {
 
       describe("when we aren't authorized to get a trust token from the api", () => {
         beforeEach(() => {
-          fetch.mockResponseOnce(
-            JSON.stringify({
-              error: "Unauthorized",
-              text: "The access token is invalid or has expired.",
-            }),
-            { status: 401 }
+          global.fetch = jest.fn(() =>
+            Promise.resolve({
+              status: 401,
+              ok: false,
+              json: () =>
+                Promise.resolve({
+                  error: "Unauthorized",
+                  text: "The access token is invalid or has expired.",
+                }),
+            })
           )
         })
 
@@ -332,7 +341,9 @@ describe("Authentication Helpers", () => {
 
       describe("when the api is down", () => {
         beforeEach(() => {
-          fetch.mockReject(new Error("api is down"))
+          global.fetch = jest.fn(() =>
+            Promise.resolve(new Error("gravity is down"))
+          )
         })
 
         it("returns the app URL, not the api url", async () => {
