@@ -309,7 +309,6 @@ describe("Authentication Helpers", () => {
 
           const actual = await apiAuthWithRedirectUrl(response, redirectPath)
 
-          const expectedRedirectUri = "https://app.example.com/any-path"
           expect(actual.toString()).toMatch(`trust_token=a-trust-token`)
         })
       })
