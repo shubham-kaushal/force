@@ -1,8 +1,0 @@
-{
-  "extends": [
-    "@artsy:app"
-  ],
-  "assignees": [
-    "zephraph"
-  ]
-}
