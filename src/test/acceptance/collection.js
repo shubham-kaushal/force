@@ -6,7 +6,7 @@ describe("Collection page", () => {
 
   before(async () => {
     ;({ metaphysics, browser } = await setup())
-    metaphysics.post("/v2", (req, res) => {
+    metaphysics.post("/", (req, res) => {
       res.send(require("./fixtures/metaphysics/collection"))
     })
   })
@@ -14,16 +14,15 @@ describe("Collection page", () => {
   after(teardown)
 
   it("renders a title and header info", async () => {
-    const $ = await browser.page("/collection/abstract-expressionism")
-    $.html().should.containEql("Abstract Expressionism")
-    $.html().should.containEql(
-      "Though Abstract Expressionists are best known for large-scale paintings"
-    )
+    const $ = await browser.page("/collection/kaws-companions")
+    $.html().should.containEql("KAWS: Companions")
+    $.html().should.containEql("Collectible Sculptures")
+    $.html().should.containEql("Brian Donnelly, better known as KAWS")
   })
 
   it("renders artwork grid", async () => {
     const $ = await browser.page("/collection/kaws-companions")
-    $.html().should.containEql("Intimate Lighting")
-    $.html().should.containEql("Magnificent Jungle Cats")
+    $.html().should.containEql("Boba Fett Companion")
+    $.html().should.containEql("Woodstock")
   })
 })

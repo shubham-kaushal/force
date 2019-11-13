@@ -46,15 +46,14 @@ const downloadGitHubReaction = async release => {
   return body
 }
 
-const getBreakingChanges = async (metaphysicsEnv, metaphysicsVersion = 2) => {
+const getBreakingChanges = async metaphysicsEnv => {
   const packageJSON = JSON.parse(
     readFileSync(path.join(__dirname, "/../package.json"), "utf8")
   )
   const reactionVersion = packageJSON["dependencies"]["@artsy/reaction"]
   const reactionSchema = await downloadGitHubReaction(reactionVersion)
-  const metaphysicsEndpoint = metaphysicsVersion === 2 ? "/v2" : ""
   const metaphyicsSchema = await downloadMetaphysicsSchema(
-    `https://metaphysics-${metaphysicsEnv}.artsy.net${metaphysicsEndpoint}`
+    `https://metaphysics-${metaphysicsEnv}.artsy.net/`
   )
 
   const allChanges = diff(

@@ -6,7 +6,7 @@ describe("Artwork page", () => {
 
   before(async () => {
     ;({ metaphysics, browser } = await setup())
-    metaphysics.post("/v2", (req, res) => {
+    metaphysics.post("/", (req, res) => {
       res.send(require("./fixtures/metaphysics/artwork"))
     })
   })
