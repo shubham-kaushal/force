@@ -76,7 +76,7 @@
 
 "@artsy/reaction@https://github.com/artsy/reaction#auct-pt-release":
   version "21.17.6"
-  resolved "https://github.com/artsy/reaction#d6b4c4c9c5edfca32697feecb726fd3745c82d60"
+  resolved "https://github.com/artsy/reaction#5d75c7224b3c62a1f4f611f2e47a47086ea17f09"
   dependencies:
     "@artsy/detect-responsive-traits" "^0.0.5"
     "@artsy/react-html-parser" "^3.0.2"
