@@ -84,10 +84,10 @@
   resolved "https://registry.yarnpkg.com/@artsy/react-html-parser/-/react-html-parser-3.0.2.tgz#6213d662441acf0bd8c9ee953aa77ac8d9cf1cdd"
   integrity sha512-FXiRSqfSvwpz/QgwaqFvjJsbDmo9qMGpvUp/0p1V6muaJbGnfxkTSxAYWmYlFst6bmjhVxCYKxvgQhEVE03Wfg==
 
-"@artsy/reaction@25.13.1":
-  version "25.13.1"
-  resolved "https://registry.yarnpkg.com/@artsy/reaction/-/reaction-25.13.1.tgz#f94c1a3c906be58133bf6d3009c9e03e3d67b869"
-  integrity sha512-csuHkc0sz/IjilY8Siiyh+GRHzqR62eCSE0MfeEGAvs7bERak3yucBMRSC2nBcNya6t30wB/EIaJSMqOt7Fagg==
+"@artsy/reaction@25.15.0":
+  version "25.15.0"
+  resolved "https://registry.yarnpkg.com/@artsy/reaction/-/reaction-25.15.0.tgz#1f3d6f5b0a1e104ab968cc5bf586bfaa8eef8905"
+  integrity sha512-GUnGB2EDLXGGpHnyleDD7NeNoi1Grdb8iW6hwLYi421NhyPV9lc/8q0F1rtN28l+QpZaX+G4lUdTfNart6deSg==
   dependencies:
     "@artsy/detect-responsive-traits" "^0.0.5"
     "@artsy/fresnel" "^1.0.13"
@@ -15824,10 +15824,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@3.7.5:
-  version "3.7.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.5.tgz#0692e21f65fd4108b9330238aac11dd2e177a1ae"
-  integrity sha512-/P5lkRXkWHNAbcJIiHPfRoKqyd7bsyCma1hZNUGfn20qm64T6ZBlrzprymeu918H+mB/0rIg2gGK/BXkhhYgBw==
+typescript@3.8.2:
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.2.tgz#91d6868aaead7da74f493c553aeff76c0c0b1d5a"
+  integrity sha512-EgOVgL/4xfVrCMbhYKUQTdF37SQn4Iw73H5BgCrF1Abdun7Kwy/QZsE/ssAy0y4LxBbvua3PIbFsbRczWWnDdQ==
 
 ua-parser-js@0.7.19, ua-parser-js@^0.7.18:
   version "0.7.19"
