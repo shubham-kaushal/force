@@ -1,3 +1,15 @@
+/**
+ * Set webpack public-path asset lookup to CDN in production, but only on
+ * the client, as we use the assetMiddleware helper to map URLs on the server.
+ * @see https://github.com/artsy/force/blob/master/src/lib/middleware/assetMiddleware.ts
+ */
+if (process.env.NODE_ENV === "production") {
+  __webpack_public_path__ =
+    (window.location.hostname === "www.artsy.net"
+      ? process.env.CDN_PRODUCTION_URL
+      : process.env.CDN_STAGING_URL) + "/assets/"
+}
+
 import $ from "jquery"
 import Backbone from "backbone"
 import _ from "underscore"

@@ -13,7 +13,7 @@ const {
 
 exports.baseConfig = {
   mode: NODE_ENV,
-  devtool: "cheap-module-source-map",
+  devtool: "source-map",
   stats: "normal", // or, `errors-only`
   entry: getEntrypoints(),
   output: {
@@ -65,6 +65,8 @@ exports.baseConfig = {
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify(NODE_ENV),
+        CND_PRODUCTION_URL: JSON.stringify(process.env.CND_PRODUCTION_URL),
+        CDN_STAGING_URL: JSON.stringify(process.env.CDN_STAGING_URL),
       },
     }),
     // Remove moment.js localization files

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": "10",
+    "node": "12",
     "yarn": "1.x.x"
   },
   "scripts": {
@@ -31,6 +31,7 @@
     "sync-schema": "rm -rf data && mkdir data && graphql-fetch-schema https://metaphysics-staging.artsy.net -o data",
     "test:smoke": "scripts/smoke_test.sh",
     "test": "scripts/test.sh",
+    "test:jest": "node node_modules/.bin/jest",
     "type-check": "tsc --pretty --noEmit",
     "unlink-all": "yalc remove --all && yarn --check-files",
     "webpack": "node --max_old_space_size=2048 -r dotenv/config -r @babel/register node_modules/.bin/webpack --config ./webpack"
@@ -59,6 +60,7 @@
   "resolutions": {
     "babel-core": "7.0.0-bridge.0",
     "domelementtype": "1.3.1",
+    "graceful-fs": "4.2.3",
     "graphql": "0.13.2",
     "htmlparser2": "3.10.1",
     "moment": "2.22.2",
@@ -70,12 +72,11 @@
     "superagent": "3.8.3"
   },
   "dependencies": {
-    "@airbnb/node-memwatch": "1.0.2",
     "@artsy/express-reloadable": "1.4.7",
     "@artsy/gemup": "0.0.3",
-    "@artsy/palette": "5.1.16",
+    "@artsy/palette": "7.1.0",
     "@artsy/passport": "1.1.11",
-    "@artsy/reaction": "25.15.0",
+    "@artsy/reaction": "25.17.1",
     "@artsy/stitch": "6.1.6",
     "@babel/core": "7.6.0",
     "@babel/node": "7.6.1",
@@ -152,7 +153,7 @@
     "glob": "7.1.3",
     "graceful-fs": "4.1.15",
     "graphql": "0.13.2",
-    "heapdump": "0.3.9",
+    "heapdump": "0.3.15",
     "helmet": "2.3.0",
     "history": "4.7.2",
     "http-proxy": "1.16.2",
