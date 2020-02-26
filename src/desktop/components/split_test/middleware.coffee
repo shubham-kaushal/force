@@ -1,6 +1,7 @@
 SplitTest = require './server_split_test.coffee'
 runningTests = require './running_tests'
 qs = require 'qs'
+httpContext = require 'express-http-context'
 { setSplitTest } = require './splitTestContext'
 
 module.exports = (req, res, next) ->
@@ -20,7 +21,7 @@ module.exports = (req, res, next) ->
   if runningTests['client_navigation_v3']
     res.locals.sd['EXPERIMENTAL_APP_SHELL'] = Boolean(res.locals.sd['CLIENT_NAVIGATION_V3'] is 'experiment')
 
-  # Store value in globally available location.
-  setSplitTest('EXPERIMENTAL_APP_SHELL', res.locals.sd['EXPERIMENTAL_APP_SHELL'])
+    # Store value in globally available location.
+    setSplitTest('EXPERIMENTAL_APP_SHELL', res.locals.sd['EXPERIMENTAL_APP_SHELL'])
 
   next()

@@ -1,6 +1,5 @@
 import { middleware as stitchMiddleware } from "@artsy/stitch/dist/internal/middleware"
 import * as globalReactModules from "desktop/components/react/stitch_components"
-import { getSplitTest } from "desktop/components/split_test/splitTestContext"
 
 const app = (module.exports = require("express")())
 
@@ -29,6 +28,7 @@ app.use(require("./apps/auction_lots"))
 // TODO: Remove after AB test ends.
 app.use(require("./apps/artist/server").app)
 app.use(require("./apps/purchases/server").app)
+app.use(require("./apps/conversations/server").app)
 app.use(require("./apps/artwork/server").app)
 app.use(require("./apps/collect/server").app)
 app.use(require("./apps/search2/server").app)
@@ -95,9 +95,4 @@ app.use(require("./apps/user"))
 // Used to test various SSR configurations
 app.use(require("./apps/ssr-experiments/server").app)
 
-if (
-  getSplitTest("EXPERIMENTAL_APP_SHELL") ||
-  process.env.EXPERIMENTAL_APP_SHELL
-) {
-  app.use(require("./apps/experimental-app-shell/server").app)
-}
+app.use(require("./apps/experimental-app-shell/server").app)
