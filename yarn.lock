@@ -35,10 +35,10 @@
   resolved "https://registry.yarnpkg.com/@artsy/gemup/-/gemup-0.0.3.tgz#0397a472bb69432dab3d2d66ca30556815aa96e7"
   integrity sha512-W///stXDTz3jSQw8UtT0BClVk4DLOsVp7a8v12efsEZvrZNT+85YBqPWq2DP1EX3ILZR1hGZhbKr/Gl5uti56Q==
 
-"@artsy/palette@7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@artsy/palette/-/palette-7.1.1.tgz#22a4088ddf4d0efe0af97aac40ecca849450b70c"
-  integrity sha512-XS5uPczGgscy5LKMxK/oB6WWHcxBdoH7SDgVjsoSdsq6yzJ07PhVnJ8hsqQYRoFYNG6f0d8W7MS/cEZstwYfvg==
+"@artsy/palette@7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@artsy/palette/-/palette-7.1.2.tgz#c561dea5fbb69df90b8c09a9e00361b3be7e9851"
+  integrity sha512-/g8NZGEIdGNOSV3rlYce4qFKhkk8xdWaxE/SgFBBpPJdE4OlUZDe9sBPJkjj5EIf8XZqd177uXq7Z9lm4qVYAg==
   dependencies:
     babel-plugin-styled-components "^1.10.0"
     d3-interpolate "^1.3.2"
@@ -76,10 +76,10 @@
   resolved "https://registry.yarnpkg.com/@artsy/react-html-parser/-/react-html-parser-3.0.2.tgz#6213d662441acf0bd8c9ee953aa77ac8d9cf1cdd"
   integrity sha512-FXiRSqfSvwpz/QgwaqFvjJsbDmo9qMGpvUp/0p1V6muaJbGnfxkTSxAYWmYlFst6bmjhVxCYKxvgQhEVE03Wfg==
 
-"@artsy/reaction@25.22.2":
-  version "25.22.2"
-  resolved "https://registry.yarnpkg.com/@artsy/reaction/-/reaction-25.22.2.tgz#9565fefe49d31dad95b8d86995a19d10c4c51bfb"
-  integrity sha512-8dco4DlI5VAjfLj7tLBbRTNV8CLMXOmCB/RrV8hi1ZQA3YQ+LBWlM0qc3z8H2x3dedtSYpl/dlWnQnT8gZEJyg==
+"@artsy/reaction@25.24.0":
+  version "25.24.0"
+  resolved "https://registry.yarnpkg.com/@artsy/reaction/-/reaction-25.24.0.tgz#67336d9d315d8ab47b90f91617c58ac08bad8ca1"
+  integrity sha512-gIWy1QO/U9WOZNtxeCBnVxrOgFeHPkHilQn/y1XXAPtQXZLptz8YXoCNDO/XpGYaC4UBUM54F8RZrskG22nrGA==
   dependencies:
     "@artsy/detect-responsive-traits" "^0.0.5"
     "@artsy/fresnel" "^1.0.13"
@@ -2329,9 +2329,9 @@ artsy-backbone-mixins@artsy/artsy-backbone-mixins:
     qs "5.2.0"
     underscore "*"
 
-artsy-eigen-web-association@artsy/artsy-eigen-web-association:
+"artsy-eigen-web-association@git://github.com/artsy/artsy-eigen-web-association.git":
   version "1.0.7"
-  resolved "https://codeload.github.com/artsy/artsy-eigen-web-association/tar.gz/0d28dc247b6a1366fabe0b95f365a61b95261c1e"
+  resolved "git://github.com/artsy/artsy-eigen-web-association.git#faf724b5486912cc3da3876b881d1bda12f187f6"
   dependencies:
     express "*"
 
