@@ -68,15 +68,15 @@
     "react-dom": "16.8.6",
     "react-test-renderer": "16.8.6",
     "react-is": "16.8.3",
-    "regenerator-runtime": "0.13.3",
+    "regenerator-runtime": "0.13.5",
     "superagent": "3.8.3"
   },
   "dependencies": {
     "@artsy/express-reloadable": "1.4.8",
     "@artsy/gemup": "0.0.3",
-    "@artsy/palette": "7.1.3",
+    "@artsy/palette": "7.1.4",
     "@artsy/passport": "1.1.11",
-    "@artsy/reaction": "25.27.14",
+    "@artsy/reaction": "25.27.17",
     "@artsy/stitch": "6.1.6",
     "@babel/core": "7.6.0",
     "@babel/node": "7.6.1",
