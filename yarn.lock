@@ -35,10 +35,10 @@
   resolved "https://registry.yarnpkg.com/@artsy/gemup/-/gemup-0.0.3.tgz#0397a472bb69432dab3d2d66ca30556815aa96e7"
   integrity sha512-W///stXDTz3jSQw8UtT0BClVk4DLOsVp7a8v12efsEZvrZNT+85YBqPWq2DP1EX3ILZR1hGZhbKr/Gl5uti56Q==
 
-"@artsy/palette@7.6.0":
-  version "7.6.0"
-  resolved "https://registry.yarnpkg.com/@artsy/palette/-/palette-7.6.0.tgz#a10dfa1e64ef9bef855dd40d0983878dd1523f28"
-  integrity sha512-WRvZP5V6Vqm/hBbZZQ/unqzz2xDwQgm2hslkwTxOR/4tqelUTSxVasZy7KXkJTZrnTrq48jfrOHThVbzdW1rhg==
+"@artsy/palette@7.8.0":
+  version "7.8.0"
+  resolved "https://registry.yarnpkg.com/@artsy/palette/-/palette-7.8.0.tgz#48b8c90ede4a4869afe2d49192bdf1fe2df62709"
+  integrity sha512-AeQiaWaa2mMv5PuLwJ1B0dfwUCMxuKWRrWNisimnwCYyas8y9mdAAKkQuBaXi9zazGviqA7iq/GUznaLfDSoIg==
   dependencies:
     babel-plugin-styled-components "^1.10.0"
     d3-interpolate "^1.3.2"
@@ -76,10 +76,10 @@
   resolved "https://registry.yarnpkg.com/@artsy/react-html-parser/-/react-html-parser-3.0.2.tgz#6213d662441acf0bd8c9ee953aa77ac8d9cf1cdd"
   integrity sha512-FXiRSqfSvwpz/QgwaqFvjJsbDmo9qMGpvUp/0p1V6muaJbGnfxkTSxAYWmYlFst6bmjhVxCYKxvgQhEVE03Wfg==
 
-"@artsy/reaction@25.42.6":
-  version "25.42.6"
-  resolved "https://registry.yarnpkg.com/@artsy/reaction/-/reaction-25.42.6.tgz#309a0ed21d37d54495a073174984f966e5b4913e"
-  integrity sha512-BAvlZumXQlQ2BuHj1wsuAF+8/A2Vpks2v/ORLlqsGTJgtkD0Xq+mOxuTr7DAPGdcw4q5bPbECQbe+qXqBATj9w==
+"@artsy/reaction@26.1.0":
+  version "26.1.0"
+  resolved "https://registry.yarnpkg.com/@artsy/reaction/-/reaction-26.1.0.tgz#f00f8a6f1736b9a4b6bf562015e004d8a4aca746"
+  integrity sha512-s/I73ZKJp5YgU1G7QxM8f/wNoFMc+RRUvkXu11+jy0QuZzZQNJ/myKnLj2cMKQsqLViC15hTtI7UJ8s+HuKa7Q==
   dependencies:
     "@artsy/detect-responsive-traits" "^0.0.5"
     "@artsy/fresnel" "^1.0.13"
