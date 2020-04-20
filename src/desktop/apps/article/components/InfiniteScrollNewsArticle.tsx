@@ -2,7 +2,7 @@ import { data as sd } from "sharify"
 import moment from "moment"
 import styled from "styled-components"
 import React, { Component, Fragment } from "react"
-import { flatten, debounce } from "lodash"
+import { flatten, throttle } from "lodash"
 import Waypoint from "react-waypoint"
 import { positronql } from "desktop/lib/positronql"
 import { newsArticlesQuery } from "desktop/apps/article/queries/articles"
@@ -17,10 +17,7 @@ import { NewsDateDivider } from "reaction/Components/Publishing/News/NewsDateDiv
 const Cookies = require("desktop/components/cookies/index.coffee")
 import { shouldAdRender } from "desktop/apps/article/helpers"
 import { handleScrollingAuthModal } from "desktop/lib/openAuthModal"
-import {
-  AuthIntent,
-  ContextModule,
-} from "@artsy/reaction/dist/Artsy/Analytics/v2/Schema"
+import { AuthIntent, ContextModule } from "@artsy/cohesion"
 
 export interface Props {
   article?: ArticleData
@@ -43,7 +40,7 @@ interface State {
 }
 
 export class InfiniteScrollNewsArticle extends Component<Props, State> {
-  private debouncedDateChange
+  private throttledDateChange
   constructor(props) {
     super(props)
 
@@ -52,7 +49,7 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
     const omit = props.article ? props.article.id : null
     const offset = props.article ? 0 : 6
 
-    this.debouncedDateChange = debounce(this.onDateChange, 200)
+    this.throttledDateChange = throttle(this.onDateChange, 50)
 
     this.state = {
       activeArticle: "",
@@ -155,7 +152,7 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
       // and the top date is updated, it leads to a reset of the current scroll
       // position, preventing the user from scrolling down the page.
       // FIXME: Reenable once newsfeed scrolling bug tracked down.
-      // this.setState({ date })
+      this.setState({ date })
     }
   }
 
@@ -214,7 +211,7 @@ export class InfiniteScrollNewsArticle extends Component<Props, State> {
               isMobile={isMobile || false}
               article={article}
               isTruncated={isTruncated}
-              onDateChange={this.debouncedDateChange}
+              onDateChange={this.throttledDateChange}
               nextArticle={articles[i + 1] as any}
               onActiveArticleChange={id => this.onActiveArticleChange(id)}
               isActive={activeArticle === article.id}
