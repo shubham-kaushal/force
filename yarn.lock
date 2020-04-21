@@ -16,6 +16,11 @@
   resolved "https://registry.yarnpkg.com/@artsy/cohesion/-/cohesion-0.1.0.tgz#8161ae6afcdb9b6bdeca621f55e88c766ad649fe"
   integrity sha512-R7fwppJz9vQBiGFJdwbNdBEPmDgNC4HPt3ElY809Oxu19sNDCSvCl28nHSMg6yXRoVkU6UqPYJy19Ku4kKyanQ==
 
+"@artsy/cohesion@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@artsy/cohesion/-/cohesion-0.2.0.tgz#b83c730e3443305161b21bfa70c6678caf9440b3"
+  integrity sha512-H3om+k4QTuUVVaX3lVNROEF8bvoc/urLglV2oxKsTIfpGX4iQc8ajCHDfs0i8WDJFZuDpWp0zv3Rc/x0ekdSPw==
+
 "@artsy/detect-responsive-traits@^0.0.5":
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/@artsy/detect-responsive-traits/-/detect-responsive-traits-0.0.5.tgz#abf85959f8567816babec6f582b744f58c98b726"
@@ -82,10 +87,10 @@
   resolved "https://registry.yarnpkg.com/@artsy/react-html-parser/-/react-html-parser-3.0.2.tgz#6213d662441acf0bd8c9ee953aa77ac8d9cf1cdd"
   integrity sha512-FXiRSqfSvwpz/QgwaqFvjJsbDmo9qMGpvUp/0p1V6muaJbGnfxkTSxAYWmYlFst6bmjhVxCYKxvgQhEVE03Wfg==
 
-"@artsy/reaction@26.21.6":
-  version "26.21.6"
-  resolved "https://registry.yarnpkg.com/@artsy/reaction/-/reaction-26.21.6.tgz#85948194a68b074f3a33c6e10a688e83b437e8a8"
-  integrity sha512-U7+0Al3JwROd9qPPWPxESVj61XcEJdJEEEwKYKNH/x/RYI9l9AodGUcVQnn7yK/vh9l63xDhDcQVBIQ05wSoww==
+"@artsy/reaction@26.22.0":
+  version "26.22.0"
+  resolved "https://registry.yarnpkg.com/@artsy/reaction/-/reaction-26.22.0.tgz#91bac16ba68f6afd2adbfa9c23ae5af1e29295c8"
+  integrity sha512-v1qpxBtVdXaG9WYfh0m/6g1k3BFDNfLn2sgZ86QRxIygMnriBg4I6z5AzF9019a2ckXC2/EP0PHBafa0pmtRJw==
   dependencies:
     "@artsy/cohesion" "0.1.0"
     "@artsy/detect-responsive-traits" "^0.0.5"
