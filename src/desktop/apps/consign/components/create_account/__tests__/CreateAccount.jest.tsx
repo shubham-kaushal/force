@@ -12,6 +12,11 @@ import { ForgotPasswordForm } from "@artsy/reaction/dist/Components/Authenticati
 import { SignUpForm } from "@artsy/reaction/dist/Components/Authentication/Desktop/SignUpForm"
 import { ModalType } from "@artsy/reaction/dist/Components/Authentication/Types"
 
+jest.mock("@artsy/reaction/dist/Artsy/SystemContext", () => ({
+  SystemContextProvider: ({ children }) => children,
+  withSystemContext: Component => Component,
+}))
+
 jest.mock("desktop/apps/authentication/helpers", () => ({
   handleSubmit: jest.fn(),
 }))
@@ -105,6 +110,30 @@ describe("React components", () => {
         copy: "Log In",
         intent: "consign",
         redirectTo: "/consign/submission",
+      },
+      { email: "user@email.com", password: "mypassword" },
+      {}
+    )
+
+    const wrapperWithTrackingParams = mount(
+      <UnconnectedCreateAccount {...props} contextPath="foo" subject="bar" />
+    ).instance() as UnconnectedCreateAccount
+
+    wrapperWithTrackingParams.handleSubmit(
+      {
+        email: "user@email.com",
+        password: "mypassword",
+      },
+      {}
+    )
+
+    expect(handleSubmitMock).toBeCalledWith(
+      "login",
+      {
+        contextModule: "consignSubmissionFlow",
+        copy: "Log In",
+        intent: "consign",
+        redirectTo: "/consign/submission?contextPath=foo&subject=bar",
       },
       { email: "user@email.com", password: "mypassword" },
       {}
