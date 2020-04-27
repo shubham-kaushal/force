@@ -8,6 +8,7 @@ import {
   ModalOptions,
   ModalType,
 } from "reaction/Components/Authentication/Types"
+import { createdAccount, successfullyLoggedIn } from "@artsy/cohesion"
 
 const mediator = require("../../../lib/mediator.coffee")
 
@@ -42,21 +43,38 @@ export class ModalContainer extends React.Component<any> {
     }
   }
 
-  onSocialAuthEvent = (data: any) => {
+  onSocialAuthEvent = ({
+    mode,
+    contextModule,
+    copy,
+    triggerSeconds,
+    intent,
+    redirectTo,
+    destination,
+    service,
+    user,
+  }: any) => {
     const analyticsOptions = {
-      action:
-        data.mode === "signup" ? "Created account" : "Successfully logged in",
-      type: data.mode,
-      context_module: data.contextModule,
-      modal_copy: data.copy,
-      trigger: data.trigger || "click",
-      trigger_seconds: data.triggerSeconds,
-      intent: data.intent,
-      auth_redirect: data.redirectTo || data.destination,
-      service: data.service,
+      type: mode,
+      contextModule,
+      copy,
+      triggerSeconds,
+      intent,
+      authRedirect: redirectTo || destination,
+      service,
+      userId: user && user.id,
+    }
+    let options
+    switch (mode) {
+      case "signup":
+        options = createdAccount(analyticsOptions)
+        break
+      case "login":
+        options = successfullyLoggedIn(analyticsOptions)
+        break
     }
 
-    Cookies.set(`analytics-${data.mode}`, JSON.stringify(analyticsOptions), {
+    Cookies.set(`analytics-${mode}`, JSON.stringify(options), {
       expires: 60 * 60 * 24,
     })
   }
@@ -70,7 +88,6 @@ export class ModalContainer extends React.Component<any> {
           signup: sd.AP.signupPagePath,
           apple: sd.AP.applePath,
           facebook: sd.AP.facebookPath,
-          twitter: sd.AP.twitterPath,
         }}
         csrf={sd.CSRF_TOKEN}
         handleSubmit={handleSubmit}

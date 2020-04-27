@@ -34,10 +34,9 @@ if (Cookies.get("analytics-signup")) {
   var data = JSON.parse(Cookies.get("analytics-signup"))
   Cookies.expire("analytics-signup")
   if (sd.CURRENT_USER) {
-    analytics.track("Created account", {
-      acquisition_initiative: data.acquisition_initiative,
-      signup_service: data.service,
-      user_id: sd.CURRENT_USER.id,
+    analytics.track({
+      ...data,
+      userId: sd.CURRENT_USER.id,
     })
   }
 }

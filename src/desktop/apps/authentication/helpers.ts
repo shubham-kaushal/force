@@ -4,10 +4,15 @@ import {
   ModalOptions,
 } from "reaction/Components/Authentication/Types"
 import { data as sd } from "sharify"
-import { pickBy, identity } from "lodash"
 import * as qs from "query-string"
 import { Response } from "express"
 import { captureException } from "@sentry/browser"
+import {
+  resetYourPassword,
+  createdAccount,
+  successfullyLoggedIn,
+  AuthService,
+} from "@artsy/cohesion"
 
 const mediator = require("desktop/lib/mediator.coffee")
 const LoggedOutUser = require("desktop/models/logged_out_user.coffee")
@@ -47,33 +52,30 @@ export const handleSubmit = (
       formikBag.setSubmitting(false)
       const analytics = (window as any).analytics
 
-      let action
-      switch (type) {
-        case ModalType.login:
-          action = "Successfully logged in"
-          break
-        case ModalType.signup:
-          action = "Created account"
-          break
-        case ModalType.forgot:
-          action = "Reset your password"
-          break
-      }
-
       if (analytics) {
         const properties = {
-          action,
-          user_id: res && res.user && res.user.id,
-          trigger: triggerSeconds ? "timed" : "click",
-          trigger_seconds: triggerSeconds,
+          userId: res && res.user && res.user.id,
+          triggerSeconds,
           intent,
-          type,
-          context_module: contextModule,
-          modal_copy: copy,
-          auth_redirect: redirectTo || destination,
-          service: "email",
+          contextModule,
+          copy,
+          authRedirect: redirectTo || destination,
+          service: "email" as AuthService,
         }
-        analytics.track(action, pickBy(properties, identity))
+
+        let action
+        switch (type) {
+          case ModalType.login:
+            action = successfullyLoggedIn(properties)
+            break
+          case ModalType.signup:
+            action = createdAccount(properties)
+            break
+          case ModalType.forgot:
+            action = resetYourPassword(properties)
+            break
+        }
+        analytics.track(action)
       }
 
       let afterAuthURL: URL

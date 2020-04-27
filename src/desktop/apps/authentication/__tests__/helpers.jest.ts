@@ -212,11 +212,12 @@ describe("Authentication Helpers", () => {
         },
       })
       // @ts-ignore
-      expect(window.analytics.track).toBeCalledWith("Successfully logged in", {
-        action: "Successfully logged in",
+      expect(window.analytics.track).toBeCalledWith({
+        action: "successfullyLoggedIn",
         auth_redirect: "/articles",
         context_module: "popUpModal",
         intent: "viewEditorial",
+        modal_copy: undefined,
         service: "email",
         trigger: "timed",
         trigger_seconds: 2,
@@ -248,16 +249,53 @@ describe("Authentication Helpers", () => {
         },
       })
       // @ts-ignore
-      expect(window.analytics.track).toBeCalledWith("Created account", {
-        action: "Created account",
+      expect(window.analytics.track).toBeCalledWith({
+        action: "createdAccount",
         auth_redirect: "/articles",
         context_module: "popUpModal",
         intent: "viewEditorial",
+        modal_copy: undefined,
+        onboarding: false,
         service: "email",
         trigger: "timed",
         trigger_seconds: 2,
         type: "signup",
         user_id: 123,
+      })
+    })
+
+    it("makes an analytics call on success for forgot password", () => {
+      handleSubmit(
+        ModalType.forgot,
+        {
+          contextModule: ContextModule.popUpModal,
+          intent: AuthIntent.viewEditorial,
+          destination: "/articles",
+          triggerSeconds: 2,
+        },
+        {
+          email: "foo@foo.com",
+        },
+        formikBag
+      )
+
+      Backbone.sync.mock.calls[0][2].success({
+        user: {
+          id: 123,
+          accessToken: "foobar",
+        },
+      })
+      // @ts-ignore
+      expect(window.analytics.track).toBeCalledWith({
+        action: "resetYourPassword",
+        auth_redirect: "/articles",
+        context_module: "popUpModal",
+        intent: "viewEditorial",
+        modal_copy: undefined,
+        service: "email",
+        trigger: "timed",
+        trigger_seconds: 2,
+        type: "forgot",
       })
     })
   })
