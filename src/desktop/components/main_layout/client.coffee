@@ -6,6 +6,7 @@ FlashMessage = require '../flash/index.coffee'
 Cookies = require 'cookies-js'
 { triggerMarketingModal } = require '../marketing_signup_modal/triggerMarketingModal.ts'
 { AuthIntent } = require "@artsy/cohesion"
+sd = require('sharify').data
 
 module.exports = ->
   globalClientSetup()
@@ -38,6 +39,19 @@ checkForAfterSignUpAction = ->
     ops and ops(@currentUser, objectId, kind)
 
     Cookies.expire 'afterSignUpAction'
+
+checkForAfterSocialLogInAction = ->
+  afterLogInAction = Cookies.get 'analytics-login'
+  if afterLogInAction
+    data = JSON.parse(Cookies.get("analytics-login"))
+    Cookies.expire("analytics-login")
+
+    if sd.CURRENT_USER
+      # FIXME: bad syntax
+      analytics.track({
+        ...data,
+        user_id: sd.CURRENT_USER.id
+      })
 
 # TODO: Follow up with Christina about this functionality
 checkForPersonalizeFlash = ->
